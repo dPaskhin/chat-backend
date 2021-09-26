@@ -1,0 +1,12 @@
+version: '3.0'
+
+services:
+  main:
+    build:
+      dockerfile: ./.docker/Dockerfile
+      context: ./
+    working_dir: /app/
+    ports:
+      - 8080:8080
+    volumes:
+      - ./app/src:/app/src/

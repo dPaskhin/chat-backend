@@ -1,0 +1,18 @@
+{
+  "name": "chat-backend",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "ts-node-dev --require tsconfig-paths/register src/index.ts"
+  },
+  "dependencies": {
+    "@nestjs/common": "^8.0.6",
+    "@nestjs/core": "^8.0.6",
+    "@nestjs/platform-express": "^8.0.6",
+    "reflect-metadata": "^0.1.13",
+    "rxjs": "^7.3.0"
+  },
+  "devDependencies": {
+    "ts-node-dev": "^1.1.8",
+    "tsconfig-paths-webpack-plugin": "^3.5.1"
+  }
+}
