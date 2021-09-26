@@ -6,5 +6,5 @@ import { AppModule } from '@app/AppModule';
 (async () => {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
-  await app.listen(8080);
+  await app.listen(8_080);
 })();
