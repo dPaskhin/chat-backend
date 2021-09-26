@@ -2,7 +2,7 @@
   "name": "chat-backend",
   "version": "0.0.1",
   "scripts": {
-    "dev": "ts-node-dev --require tsconfig-paths/register src/index.ts",
+    "dev": "ts-node-dev -r tsconfig-paths/register ./src/index.ts",
     "lint": "tsc && eslint --fix ./src"
   },
   "dependencies": {
@@ -10,7 +10,9 @@
     "@nestjs/core": "^8.0.6",
     "@nestjs/platform-express": "^8.0.6",
     "reflect-metadata": "^0.1.13",
-    "rxjs": "^7.3.0"
+    "rxjs": "^7.3.0",
+    "ts-node-dev": "^1.1.8",
+    "tsconfig-paths": "^3.11.0"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.31.2",
@@ -27,8 +29,6 @@
     "eslint-plugin-sonarjs": "^0.10.0",
     "eslint-plugin-unicorn": "^36.0.0",
     "prettier": "^2.4.1",
-    "prettier-eslint": "^13.0.0",
-    "ts-node-dev": "^1.1.8",
-    "tsconfig-paths-webpack-plugin": "^3.5.1"
+    "prettier-eslint": "^13.0.0"
   }
 }
