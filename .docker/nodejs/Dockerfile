@@ -9,5 +9,3 @@ COPY ../../app .
 RUN npm ci
 
 CMD ["npm", "run", "dev"]
-
-EXPOSE 8080

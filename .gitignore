@@ -2,3 +2,5 @@
 
 /app/node_modules/
 /.docker-data/
+
+.env
