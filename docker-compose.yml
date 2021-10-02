@@ -1,12 +1,26 @@
 version: '3.0'
 
 services:
-  main:
+  nodejs:
     build:
-      dockerfile: ./.docker/Dockerfile
+      dockerfile: ./.docker/nodejs/Dockerfile
       context: ./
     working_dir: /app/
     ports:
       - 8080:8080
     volumes:
       - ./app/src:/app/src/
+    depends_on:
+      - postgres
+  postgres:
+    build: ./.docker/postgres
+    environment:
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_USER=root
+      - POSTGRES_DB=test
+    ports:
+      - 5432:5432
+    volumes:
+      - ./.docker-data/postgres/data:/var/lib/postgresql/data
+
+

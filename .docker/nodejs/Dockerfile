@@ -4,7 +4,7 @@ WORKDIR /app
 
 RUN cd /app
 
-COPY ../app .
+COPY ../../app .
 
 RUN npm ci
 
