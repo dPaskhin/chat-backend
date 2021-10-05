@@ -7,5 +7,9 @@ up-d:
 down:
 	docker-compose down
 
+restart:
+	docker-compose down
+	docker-compose up
+
 build-image:
-	docker-compose build
+	docker-compose build --no-cache
