@@ -11,6 +11,7 @@ services:
       - .env
     ports:
       - ${PORT}:${PORT}
+      - ${DEBUG_PORT}:${DEBUG_PORT}
     volumes:
       - ./app/src:/app/src/
     depends_on:

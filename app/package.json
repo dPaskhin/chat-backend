@@ -2,7 +2,7 @@
   "name": "chat-backend",
   "version": "0.0.1",
   "scripts": {
-    "dev": "ts-node-dev -r tsconfig-paths/register src/main.ts",
+    "dev": "ts-node-dev --inspect=0.0.0.0:5555 -r tsconfig-paths/register src/main.ts",
     "lint": "tsc && eslint --fix ./src"
   },
   "dependencies": {
