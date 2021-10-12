@@ -1,9 +1,4 @@
-import {
-  HttpException,
-  HttpStatus,
-  Injectable,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { HttpStatus, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { compare, hash } from 'bcryptjs';
 
@@ -12,21 +7,23 @@ import { IJwtTokenDto } from '@app/Auth/dto/IJwtTokenDto';
 import { UserEntity } from '@app/User/entities/UserEntity';
 import { CreateUserDto } from '@app/User/dto/CreateUserDto';
 import { LoginDto } from '@app/Auth/dto/LoginDto';
+import { SystemErrorFactory } from '@app/SystemError/factories/SystemErrorFactory';
 
 @Injectable()
 export class AuthService {
   public constructor(
     private readonly userService: UserService,
     private readonly jwtService: JwtService,
+    private readonly systemErrorFactory: SystemErrorFactory,
   ) {}
 
   public async register(dto: CreateUserDto): Promise<IJwtTokenDto> {
     const candidate = await this.userService.findByLogin(dto.login);
 
     if (candidate) {
-      throw new HttpException(
-        'Пользователь с таким логином уже существует',
+      throw this.systemErrorFactory.create(
         HttpStatus.BAD_REQUEST,
+        'Пользователь с таким логином уже существует',
       );
     }
 
@@ -43,17 +40,19 @@ export class AuthService {
     const candidate = await this.userService.findByLogin(dto.login);
 
     if (!candidate) {
-      throw new UnauthorizedException({
-        message: 'Некорректный логин или пароль',
-      });
+      throw this.systemErrorFactory.create(
+        HttpStatus.UNAUTHORIZED,
+        'Некорректный логин или пароль',
+      );
     }
 
     const isPasswordEquals = await compare(dto.password, candidate.password);
 
     if (!isPasswordEquals) {
-      throw new UnauthorizedException({
-        message: 'Некорректный логин или пароль',
-      });
+      throw this.systemErrorFactory.create(
+        HttpStatus.UNAUTHORIZED,
+        'Некорректный логин или пароль',
+      );
     }
 
     return this.generateToken(candidate);
