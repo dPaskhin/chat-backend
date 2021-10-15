@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   type: 'postgres',
   host: process.env.POSTGRES_HOST,
   port: process.env.POSTGRES_PORT,
@@ -7,4 +7,4 @@ module.exports = {
   database: process.env.POSTGRES_DB,
   synchronize: true,
   entities: ['src/**/entities/*.ts'],
-}
+};
