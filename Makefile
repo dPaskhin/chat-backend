@@ -13,3 +13,6 @@ restart:
 
 build-image:
 	docker-compose build --no-cache
+
+rebuild-image:
+	docker-compose down && docker image prune -a && docker-compose build --no-cache
