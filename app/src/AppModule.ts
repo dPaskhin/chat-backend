@@ -6,6 +6,7 @@ import { ValidationErrorModule } from '@app/ValidationError/ValidationErrorModul
 import { AuthModule } from '@app/Auth/AuthModule';
 import { ErrorFilterModule } from '@app/ErrorFilter/ErrorFilterModule';
 import { SystemErrorModule } from '@app/SystemError/SystemErrorModule';
+import { CommonModule } from '@app/Common/CommonModule';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { SystemErrorModule } from '@app/SystemError/SystemErrorModule';
     AuthModule,
     ErrorFilterModule,
     SystemErrorModule,
+    CommonModule,
   ],
 })
 export class AppModule {}
