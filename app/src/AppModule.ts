@@ -7,6 +7,7 @@ import { AuthModule } from '@app/Auth/AuthModule';
 import { ErrorFilterModule } from '@app/ErrorFilter/ErrorFilterModule';
 import { SystemErrorModule } from '@app/SystemError/SystemErrorModule';
 import { CommonModule } from '@app/Common/CommonModule';
+import { ConfigModule } from '@app/Config/ConfigModule';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { CommonModule } from '@app/Common/CommonModule';
     ErrorFilterModule,
     SystemErrorModule,
     CommonModule,
+    ConfigModule,
   ],
 })
 export class AppModule {}
