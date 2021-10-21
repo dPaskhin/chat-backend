@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 // eslint-disable-next-line import/no-cycle
-import { MessageEntity } from '@app/Message/entities/MessageEntity';
+import { MessageEntity } from '@app/MessageManagement/entities/MessageEntity';
 
 @Entity('user')
 export class UserEntity {

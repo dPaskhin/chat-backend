@@ -2,7 +2,7 @@ import { Body, Controller, Post } from '@nestjs/common';
 
 import { AuthService } from '@app/Auth/services/AuthService';
 import { IJwtTokenDto } from '@app/Auth/dto/IJwtTokenDto';
-import { CreateUserDto } from '@app/User/dto/CreateUserDto';
+import { CreateUserDto } from '@app/UserManagement/dto/CreateUserDto';
 import { LoginDto } from '@app/Auth/dto/LoginDto';
 
 @Controller('auth')

@@ -2,10 +2,10 @@ import { HttpStatus, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { compare, hash } from 'bcryptjs';
 
-import { UserService } from '@app/User/services/UserService';
+import { UserService } from '@app/UserManagement/services/UserService';
 import { IJwtTokenDto } from '@app/Auth/dto/IJwtTokenDto';
-import { UserEntity } from '@app/User/entities/UserEntity';
-import { CreateUserDto } from '@app/User/dto/CreateUserDto';
+import { UserEntity } from '@app/UserManagement/entities/UserEntity';
+import { CreateUserDto } from '@app/UserManagement/dto/CreateUserDto';
 import { LoginDto } from '@app/Auth/dto/LoginDto';
 import { SystemErrorFactory } from '@app/SystemError/factories/SystemErrorFactory';
 
