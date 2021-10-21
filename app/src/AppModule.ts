@@ -8,6 +8,7 @@ import { ErrorFilterModule } from '@app/ErrorFilter/ErrorFilterModule';
 import { SystemErrorModule } from '@app/SystemError/SystemErrorModule';
 import { CommonModule } from '@app/Common/CommonModule';
 import { ConfigModule } from '@app/Config/ConfigModule';
+import { MessageModule } from '@app/Message/MessageModule';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { ConfigModule } from '@app/Config/ConfigModule';
     SystemErrorModule,
     CommonModule,
     ConfigModule,
+    MessageModule,
   ],
 })
 export class AppModule {}

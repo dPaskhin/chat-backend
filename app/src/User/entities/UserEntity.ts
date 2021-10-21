@@ -1,4 +1,7 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+
+// eslint-disable-next-line import/no-cycle
+import { MessageEntity } from '@app/Message/entities/MessageEntity';
 
 @Entity('user')
 export class UserEntity {
@@ -16,4 +19,7 @@ export class UserEntity {
 
   @Column({ nullable: true })
   public lastName!: string;
+
+  @OneToMany(() => MessageEntity, (message) => message.user, { eager: true })
+  public messages!: MessageEntity[];
 }
