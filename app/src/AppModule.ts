@@ -9,6 +9,7 @@ import { SystemErrorModule } from '@app/SystemError/SystemErrorModule';
 import { CommonModule } from '@app/Common/CommonModule';
 import { ConfigModule } from '@app/Config/ConfigModule';
 import { MessageManagementModule } from '@app/MessageManagement/MessageManagementModule';
+import { RoomManagementModule } from '@app/RoomManagement/RoomManagementModule';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { MessageManagementModule } from '@app/MessageManagement/MessageManagemen
     CommonModule,
     ConfigModule,
     MessageManagementModule,
+    RoomManagementModule,
   ],
 })
 export class AppModule {}

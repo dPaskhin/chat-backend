@@ -1,7 +1,7 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 // eslint-disable-next-line import/no-cycle
-import { UserEntity } from '@app/UserManagement/entities/UserEntity';
+import { ParticipantEntity } from '@app/RoomManagement/entities/ParticipantEntity';
 
 @Entity('message')
 export class MessageEntity {
@@ -11,6 +11,6 @@ export class MessageEntity {
   @Column({ nullable: false })
   public value!: string;
 
-  @ManyToOne(() => UserEntity, (user) => user.messages)
-  public user!: UserEntity;
+  @ManyToOne(() => ParticipantEntity, (participant) => participant.messages)
+  public participant!: ParticipantEntity;
 }
