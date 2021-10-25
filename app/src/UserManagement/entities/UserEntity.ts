@@ -1,9 +1,16 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+/*
+eslint
+import/no-cycle: off,
+*/
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+
+import { ParticipantEntity } from '@app/RoomManagement/entities/ParticipantEntity';
+import { UserRelation } from '@app/UserManagement/enums/UserRelation';
 
 @Entity('user')
 export class UserEntity {
   @PrimaryGeneratedColumn('uuid')
-  public id!: number;
+  public id!: string;
 
   @Column({ unique: true, nullable: false })
   public login!: string;
@@ -16,4 +23,7 @@ export class UserEntity {
 
   @Column({ nullable: true })
   public lastName!: string;
+
+  @OneToMany(() => ParticipantEntity, (participant) => participant.user)
+  public [UserRelation.PARTICIPANTS]!: ParticipantEntity[];
 }

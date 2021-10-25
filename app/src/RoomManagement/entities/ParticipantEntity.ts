@@ -1,18 +1,25 @@
-import { Entity, ManyToOne, OneToMany } from 'typeorm';
+/*
+eslint
+import/no-cycle: off,
+*/
+import { Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
-import { UserEntity } from '@app/UserManagement/entities/UserEntity';
-// eslint-disable-next-line import/no-cycle
 import { RoomEntity } from '@app/RoomManagement/entities/RoomEntity';
-// eslint-disable-next-line import/no-cycle
 import { MessageEntity } from '@app/MessageManagement/entities/MessageEntity';
+import { ParticipantRelation } from '@app/RoomManagement/enums/ParticipantRelation';
+import { UserEntity } from '@app/UserManagement/entities/UserEntity';
 
 @Entity('participant')
-export class ParticipantEntity extends UserEntity {
-  @ManyToOne(() => RoomEntity, (room) => room.participants)
-  public room!: RoomEntity;
+export class ParticipantEntity {
+  @PrimaryGeneratedColumn('uuid')
+  public id!: string;
 
-  @OneToMany(() => MessageEntity, (message) => message.participant, {
-    eager: true,
-  })
-  public messages!: MessageEntity[];
+  @ManyToOne(() => UserEntity, (user) => user.participants)
+  public [ParticipantRelation.USER]!: UserEntity;
+
+  @ManyToOne(() => RoomEntity, (room) => room.participants)
+  public [ParticipantRelation.ROOM]!: RoomEntity;
+
+  @OneToMany(() => MessageEntity, (message) => message.participant)
+  public [ParticipantRelation.MESSAGES]!: MessageEntity[];
 }

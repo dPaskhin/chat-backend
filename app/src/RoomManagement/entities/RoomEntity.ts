@@ -1,15 +1,17 @@
+/*
+eslint
+import/no-cycle: off,
+*/
 import { Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
-// eslint-disable-next-line import/no-cycle
 import { ParticipantEntity } from '@app/RoomManagement/entities/ParticipantEntity';
+import { RoomRelation } from '@app/RoomManagement/enums/RoomRelation';
 
 @Entity('room')
 export class RoomEntity {
   @PrimaryGeneratedColumn('uuid')
-  public id!: number;
+  public id!: string;
 
-  @OneToMany(() => ParticipantEntity, (participant) => participant.room, {
-    eager: true,
-  })
-  public participants!: ParticipantEntity[];
+  @OneToMany(() => ParticipantEntity, (participant) => participant.room)
+  public [RoomRelation.PARTICIPANTS]!: ParticipantEntity[];
 }
