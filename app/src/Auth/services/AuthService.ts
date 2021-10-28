@@ -8,6 +8,7 @@ import { UserEntity } from '@app/UserManagement/entities/UserEntity';
 import { CreateUserDto } from '@app/UserManagement/dto/CreateUserDto';
 import { LoginDto } from '@app/Auth/dto/LoginDto';
 import { SystemErrorFactory } from '@app/SystemError/factories/SystemErrorFactory';
+import { ITokenUser } from '@app/Auth/types/ITokenUser';
 
 @Injectable()
 export class AuthService {
@@ -60,7 +61,10 @@ export class AuthService {
 
   private generateToken(user: UserEntity): IJwtTokenDto {
     return {
-      token: this.jwtService.sign({ id: user.id, login: user.login }),
+      token: this.jwtService.sign({
+        id: user.id,
+        login: user.login,
+      } as ITokenUser),
     };
   }
 }

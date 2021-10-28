@@ -20,13 +20,16 @@ export class RoomService {
     return this.roomRepository.find();
   }
 
-  public async create(dto: CreateRoomDto): Promise<RoomEntity> {
-    const currentUser = await this.userService.findById(dto.currentUserId);
+  public async create(
+    currentUserId: string,
+    dto: CreateRoomDto,
+  ): Promise<RoomEntity> {
+    const currentUser = await this.userService.findById(currentUserId);
 
     if (!currentUser) {
       throw this.systemErrorFactory.create(
-        HttpStatus.UNAUTHORIZED,
-        'Текущий пользователь не найден.',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+        'Не найден текущий пользователь',
       );
     }
 
