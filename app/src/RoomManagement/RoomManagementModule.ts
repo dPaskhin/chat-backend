@@ -17,5 +17,6 @@ import { AuthModule } from '@app/Auth/AuthModule';
   ],
   providers: [RoomService, ParticipantService],
   controllers: [RoomManagementController],
+  exports: [ParticipantService],
 })
 export class RoomManagementModule {}

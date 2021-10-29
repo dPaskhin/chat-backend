@@ -12,6 +12,15 @@ export class ParticipantService {
     private readonly participantRepository: ParticipantRepository,
   ) {}
 
+  public findByUserIdAndRoomId(
+    userId: string,
+    roomId: string,
+  ): Promise<ParticipantEntity | undefined> {
+    return this.participantRepository.findOne({
+      where: { user: { id: userId }, room: { id: roomId } },
+    });
+  }
+
   public createByUsers(users: UserEntity[]): Promise<ParticipantEntity[]> {
     return this.participantRepository.save(users.map((user) => ({ user })));
   }
