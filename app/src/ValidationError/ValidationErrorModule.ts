@@ -12,6 +12,7 @@ import { ValidationErrorFactory } from '@app/ValidationError/factories/Validatio
       useFactory: (factory: ValidationErrorFactory) =>
         new ValidationPipe({
           exceptionFactory: factory.create.bind(factory),
+          whitelist: true,
         }),
       inject: [ValidationErrorFactory],
     },
