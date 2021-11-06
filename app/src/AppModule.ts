@@ -1,4 +1,5 @@
-import { Module } from '@nestjs/common';
+import { ClassSerializerInterceptor, Module } from '@nestjs/common';
+import { APP_INTERCEPTOR } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { UserManagementModule } from '@app/UserManagement/UserManagementModule';
@@ -23,6 +24,12 @@ import { RoomManagementModule } from '@app/RoomManagement/RoomManagementModule';
     ConfigModule,
     MessageManagementModule,
     RoomManagementModule,
+  ],
+  providers: [
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: ClassSerializerInterceptor,
+    },
   ],
 })
 export class AppModule {}

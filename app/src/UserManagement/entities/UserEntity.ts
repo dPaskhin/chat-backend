@@ -3,6 +3,7 @@ eslint
 import/no-cycle: off,
 */
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Exclude } from 'class-transformer';
 
 import { ParticipantEntity } from '@app/RoomManagement/entities/ParticipantEntity';
 import { UserRelation } from '@app/UserManagement/enums/UserRelation';
@@ -15,6 +16,7 @@ export class UserEntity {
   @Column({ unique: true, nullable: false })
   public login!: string;
 
+  @Exclude()
   @Column({ nullable: false })
   public password!: string;
 
