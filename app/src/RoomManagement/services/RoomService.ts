@@ -17,8 +17,8 @@ export class RoomService {
     private readonly systemErrorFactory: SystemErrorFactory,
   ) {}
 
-  public getAll(): Promise<RoomEntity[]> {
-    return this.roomRepository.find();
+  public getAll(relations?: string[]): Promise<RoomEntity[]> {
+    return this.roomRepository.find({ relations });
   }
 
   public async create(

@@ -6,6 +6,7 @@ import { CreateRoomDto } from '@app/RoomManagement/dto/CreateRoomDto';
 import { AuthGuard } from '@app/Common/guards/AuthGuard';
 import { CurrentUserDecorator } from '@app/Common/decorators/CurrentUserDecorator';
 import { UserEntity } from '@app/UserManagement/entities/UserEntity';
+import { QueryIncludes } from '@app/Common/decorators/QueryIncludes';
 
 @Controller('room-management')
 export class RoomManagementController {
@@ -13,8 +14,8 @@ export class RoomManagementController {
 
   @UseGuards(AuthGuard)
   @Get('/rooms')
-  public getRooms(): Promise<RoomEntity[]> {
-    return this.roomService.getAll();
+  public getRooms(@QueryIncludes() includes: string[]): Promise<RoomEntity[]> {
+    return this.roomService.getAll(includes);
   }
 
   @UseGuards(AuthGuard)
