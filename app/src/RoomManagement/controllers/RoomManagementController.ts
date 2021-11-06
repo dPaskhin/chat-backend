@@ -4,7 +4,8 @@ import { RoomEntity } from '@app/RoomManagement/entities/RoomEntity';
 import { RoomService } from '@app/RoomManagement/services/RoomService';
 import { CreateRoomDto } from '@app/RoomManagement/dto/CreateRoomDto';
 import { AuthGuard } from '@app/Common/guards/AuthGuard';
-import { UserIdDecorator } from '@app/Common/decorators/UserIdDecorator';
+import { CurrentUserDecorator } from '@app/Common/decorators/CurrentUserDecorator';
+import { UserEntity } from '@app/UserManagement/entities/UserEntity';
 
 @Controller('room-management')
 export class RoomManagementController {
@@ -19,9 +20,9 @@ export class RoomManagementController {
   @UseGuards(AuthGuard)
   @Post('/add-room')
   public addRoom(
-    @UserIdDecorator() userId: string,
+    @CurrentUserDecorator() currentUser: UserEntity,
     @Body() body: CreateRoomDto,
   ): Promise<RoomEntity> {
-    return this.roomService.create(userId, body);
+    return this.roomService.create(currentUser, body);
   }
 }

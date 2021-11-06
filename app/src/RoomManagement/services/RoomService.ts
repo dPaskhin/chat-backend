@@ -6,6 +6,7 @@ import { CreateRoomDto } from '@app/RoomManagement/dto/CreateRoomDto';
 import { ParticipantService } from '@app/RoomManagement/services/ParticipantService';
 import { UserService } from '@app/UserManagement/services/UserService';
 import { SystemErrorFactory } from '@app/SystemError/factories/SystemErrorFactory';
+import { UserEntity } from '@app/UserManagement/entities/UserEntity';
 
 @Injectable()
 export class RoomService {
@@ -21,18 +22,9 @@ export class RoomService {
   }
 
   public async create(
-    currentUserId: string,
+    currentUser: UserEntity,
     dto: CreateRoomDto,
   ): Promise<RoomEntity> {
-    const currentUser = await this.userService.findById(currentUserId);
-
-    if (!currentUser) {
-      throw this.systemErrorFactory.create(
-        HttpStatus.INTERNAL_SERVER_ERROR,
-        'Не найден текущий пользователь',
-      );
-    }
-
     const notExistingUserIds = await this.userService.getNotExistingIds(
       dto.userIds,
     );

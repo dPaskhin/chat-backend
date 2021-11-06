@@ -1,17 +1,15 @@
-import { forwardRef, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 
 import { AuthService } from '@app/Auth/services/AuthService';
 import { AuthController } from '@app/Auth/controllers/AuthController';
 // eslint-disable-next-line import/no-cycle
-import { UserManagementModule } from '@app/UserManagement/UserManagementModule';
 import { ConfigModule } from '@app/Config/ConfigModule';
 import { ConfigService } from '@app/Config/services/ConfigService';
 import { ConfigName } from '@app/Config/enums/ConfigName';
 
 @Module({
   imports: [
-    forwardRef(() => UserManagementModule),
     JwtModule.registerAsync({
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({

@@ -5,6 +5,7 @@ import { MessageEntity } from '@app/MessageManagement/entities/MessageEntity';
 import { ParticipantService } from '@app/RoomManagement/services/ParticipantService';
 import { CreateMessageDto } from '@app/MessageManagement/dto/CreateMessageDto';
 import { SystemErrorFactory } from '@app/SystemError/factories/SystemErrorFactory';
+import { UserEntity } from '@app/UserManagement/entities/UserEntity';
 
 @Injectable()
 export class MessageService {
@@ -15,12 +16,12 @@ export class MessageService {
   ) {}
 
   public async create(
-    currentUserId: string,
+    currentUser: UserEntity,
     dto: CreateMessageDto,
   ): Promise<MessageEntity> {
     const candidateParticipant =
       await this.participantService.findByUserIdAndRoomId(
-        currentUserId,
+        currentUser.id,
         dto.roomId,
       );
 
