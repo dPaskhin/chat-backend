@@ -6,6 +6,7 @@ declare global {
     interface ProcessEnv {
       [ConfigName.PORT]: string;
       [ConfigName.JWT_SECRET]: string;
+      [ConfigName.WS_PORT]: string;
     }
   }
 }

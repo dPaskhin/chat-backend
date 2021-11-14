@@ -7,6 +7,7 @@ import { FormatResponseInterceptor } from '@app/Common/interceptors/FormatRespon
 import { ConfigModule } from '@app/Config/ConfigModule';
 import { ConfigService } from '@app/Config/services/ConfigService';
 import { ConfigName } from '@app/Config/enums/ConfigName';
+import { WsAdapter } from '@app/Common/adapters/WsAdapter';
 
 (async () => {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -14,10 +15,10 @@ import { ConfigName } from '@app/Config/enums/ConfigName';
   const formatResponseInterceptor = app
     .select(CommonModule)
     .get(FormatResponseInterceptor);
+  const configService = app.select(ConfigModule).get(ConfigService);
 
   app.useGlobalInterceptors(formatResponseInterceptor);
-
-  const configService = app.select(ConfigModule).get(ConfigService);
+  app.useWebSocketAdapter(new WsAdapter(app));
 
   await app.listen(configService.get(ConfigName.PORT));
 })();

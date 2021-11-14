@@ -11,7 +11,9 @@
     "@nestjs/core": "^8.0.6",
     "@nestjs/jwt": "^8.0.0",
     "@nestjs/platform-express": "^8.0.6",
+    "@nestjs/platform-socket.io": "^8.2.0",
     "@nestjs/typeorm": "^8.0.2",
+    "@nestjs/websockets": "^8.2.0",
     "bcryptjs": "^2.4.3",
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.1",
@@ -21,6 +23,7 @@
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.3.0",
     "serialize-error": "^8.1.0",
+    "socket.io": "^4.3.2",
     "ts-node-dev": "^1.1.8",
     "tsconfig-paths": "^3.11.0",
     "typeorm": "^0.2.37"
