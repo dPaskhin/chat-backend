@@ -67,4 +67,19 @@ export class AuthService {
       } as ITokenUser),
     };
   }
+
+  public async findUserFromAuthHeader(
+    authHeader: string,
+  ): Promise<UserEntity | void> {
+    const [type, token] = authHeader.split(' ');
+
+    const userId = (await this.jwtService.verifyAsync<ITokenUser>(token)).id;
+    const authorizedUser = await this.userService.findById(userId);
+
+    if (type !== 'Bearer' || !token || !authorizedUser) {
+      return undefined;
+    }
+
+    return authorizedUser;
+  }
 }

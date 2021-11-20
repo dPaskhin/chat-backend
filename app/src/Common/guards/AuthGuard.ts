@@ -4,19 +4,16 @@ import {
   HttpStatus,
   Injectable,
 } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
 
 import { SystemErrorFactory } from '@app/SystemError/factories/SystemErrorFactory';
 import { IRequestWithUser } from '@app/Common/types/IRequestWithUser';
-import { ITokenUser } from '@app/Auth/types/ITokenUser';
-import { UserService } from '@app/UserManagement/services/UserService';
+import { AuthService } from '@app/Auth/services/AuthService';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
   public constructor(
-    private readonly jwtService: JwtService,
     private readonly systemErrorFactory: SystemErrorFactory,
-    private readonly userService: UserService,
+    private readonly authService: AuthService,
   ) {}
 
   public async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -24,23 +21,21 @@ export class AuthGuard implements CanActivate {
 
     const authHeader = request.headers.authorization;
 
+    const unAuthError = this.systemErrorFactory.create(
+      HttpStatus.UNAUTHORIZED,
+      'Пользователь не авторизован',
+    );
+
     if (!authHeader) {
-      throw this.systemErrorFactory.create(
-        HttpStatus.UNAUTHORIZED,
-        'Пользователь не авторизован',
-      );
+      throw unAuthError;
     }
 
-    const [type, token] = authHeader.split(' ');
+    const authorizedUser = await this.authService.findUserFromAuthHeader(
+      authHeader,
+    );
 
-    const userId = (await this.jwtService.verifyAsync<ITokenUser>(token)).id;
-    const authorizedUser = await this.userService.findById(userId);
-
-    if (type !== 'Bearer' || !token || !authorizedUser) {
-      throw this.systemErrorFactory.create(
-        HttpStatus.UNAUTHORIZED,
-        'Пользователь не авторизован',
-      );
+    if (!authorizedUser) {
+      throw unAuthError;
     }
 
     request.user = authorizedUser;

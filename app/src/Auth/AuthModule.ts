@@ -25,6 +25,6 @@ import { UserManagementModule } from '@app/UserManagement/UserManagementModule';
   ],
   providers: [AuthService],
   controllers: [AuthController],
-  exports: [JwtModule],
+  exports: [JwtModule, AuthService],
 })
 export class AuthModule {}
