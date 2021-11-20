@@ -1,4 +1,4 @@
-import { Module, forwardRef, Global } from '@nestjs/common';
+import { Module, forwardRef } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { UserService } from '@app/UserManagement/services/UserService';
@@ -7,7 +7,6 @@ import { UserManagementController } from '@app/UserManagement/controllers/UserMa
 // eslint-disable-next-line import/no-cycle
 import { AuthModule } from '@app/Auth/AuthModule';
 
-@Global()
 @Module({
   imports: [
     TypeOrmModule.forFeature([UserRepository]),
