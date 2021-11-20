@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Global, Module } from '@nestjs/common';
 import { APP_FILTER } from '@nestjs/core';
 
 import { ErrorFilter } from '@app/ErrorFilter/filters/ErrorFilter';
@@ -7,7 +7,12 @@ import { ErrorApiResponseFactory } from '@app/ErrorFilter/factories/ErrorApiResp
 import { RestNotFoundHandler } from '@app/ErrorFilter/services/rest/RestNotFoundHandler';
 import { RestSystemErrorHandler } from '@app/ErrorFilter/services/rest/RestSystemErrorHandler';
 import { RestValidationErrorHandler } from '@app/ErrorFilter/services/rest/RestValidationErrorHandler';
+import { WsErrorFilter } from '@app/ErrorFilter/filters/WsErrorFilter';
+import { WsDefaultHandler } from '@app/ErrorFilter/services/ws/WsDefaultHandler';
+import { WsSystemErrorHandler } from '@app/ErrorFilter/services/ws/WsSystemErrorHandler';
+import { WsValidationErrorHandler } from '@app/ErrorFilter/services/ws/WsValidationErrorHandler';
 
+@Global()
 @Module({
   providers: [
     {
@@ -19,6 +24,16 @@ import { RestValidationErrorHandler } from '@app/ErrorFilter/services/rest/RestV
     RestNotFoundHandler,
     RestSystemErrorHandler,
     RestValidationErrorHandler,
+    WsErrorFilter,
+    WsDefaultHandler,
+    WsSystemErrorHandler,
+    WsValidationErrorHandler,
+  ],
+  exports: [
+    WsErrorFilter,
+    WsDefaultHandler,
+    WsSystemErrorHandler,
+    WsValidationErrorHandler,
   ],
 })
 export class ErrorFilterModule {}
