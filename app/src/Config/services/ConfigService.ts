@@ -19,4 +19,8 @@ export class ConfigService {
 
     return value;
   }
+
+  public getIsResponseDetailError(): boolean {
+    return this.get(ConfigName.RESPONSE_DETAIL_ERROR) === '1';
+  }
 }

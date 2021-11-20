@@ -7,6 +7,7 @@ declare global {
       [ConfigName.PORT]: string;
       [ConfigName.JWT_SECRET]: string;
       [ConfigName.WS_PORT]: string;
+      [ConfigName.RESPONSE_DETAIL_ERROR]: '0' | '1';
     }
   }
 }
