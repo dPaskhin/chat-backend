@@ -1,6 +1,7 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { compare, hash } from 'bcryptjs';
+import { isJWT } from 'class-validator';
 
 import { UserService } from '@app/UserManagement/services/UserService';
 import { IJwtTokenDto } from '@app/Auth/dto/IJwtTokenDto';
@@ -73,13 +74,12 @@ export class AuthService {
   ): Promise<UserEntity | void> {
     const [type, token] = authHeader.split(' ');
 
-    const userId = (await this.jwtService.verifyAsync<ITokenUser>(token)).id;
-    const authorizedUser = await this.userService.findById(userId);
-
-    if (type !== 'Bearer' || !token || !authorizedUser) {
+    if (type !== 'Bearer' || !isJWT(token)) {
       return undefined;
     }
 
-    return authorizedUser;
+    const userId = (await this.jwtService.verifyAsync<ITokenUser>(token)).id;
+
+    return this.userService.findById(userId);
   }
 }
