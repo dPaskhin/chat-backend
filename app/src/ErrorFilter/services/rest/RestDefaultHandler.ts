@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { HttpStatus, Injectable } from '@nestjs/common';
 
-import { IRestHandler } from '@app/ErrorFilter/interfaces/IRestHandler';
+import { IRestHandler } from '@app/ErrorFilter/types/IRestHandler';
 import { ErrorApiResponseFactory } from '@app/ErrorFilter/factories/ErrorApiResponseFactory';
 
 @Injectable()

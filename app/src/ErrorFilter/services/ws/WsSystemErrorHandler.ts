@@ -3,7 +3,7 @@ import { Socket } from 'socket.io';
 
 import { ErrorApiResponseFactory } from '@app/ErrorFilter/factories/ErrorApiResponseFactory';
 import { SystemError } from '@app/SystemError/dto/SystemError';
-import { IWsHandler } from '@app/ErrorFilter/interfaces/IWsHandler';
+import { IWsHandler } from '@app/ErrorFilter/types/IWsHandler';
 import { EXCEPTION_EVENT } from '@app/ErrorFilter/services/ws/WsDefaultHandler';
 
 @Injectable()
