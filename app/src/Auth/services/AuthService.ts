@@ -78,7 +78,13 @@ export class AuthService {
       return undefined;
     }
 
-    const userId = (await this.jwtService.verifyAsync<ITokenUser>(token)).id;
+    let userId: string;
+
+    try {
+      userId = (await this.jwtService.verifyAsync<ITokenUser>(token)).id;
+    } catch {
+      return undefined;
+    }
 
     return this.userService.findById(userId);
   }
