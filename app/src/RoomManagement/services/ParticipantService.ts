@@ -58,4 +58,14 @@ export class ParticipantService {
       'user.id',
     );
   }
+
+  public getByRoomId(
+    id: string,
+    relations?: string[],
+  ): Promise<ParticipantEntity[]> {
+    return this.participantRepository.find({
+      where: { room: { id } },
+      relations,
+    });
+  }
 }
