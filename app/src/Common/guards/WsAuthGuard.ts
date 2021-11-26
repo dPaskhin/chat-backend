@@ -4,10 +4,10 @@ import {
   HttpStatus,
   Injectable,
 } from '@nestjs/common';
-import { Socket } from 'socket.io';
 
 import { SystemErrorFactory } from '@app/SystemError/factories/SystemErrorFactory';
 import { AuthService } from '@app/Auth/services/AuthService';
+import { ISocketWithUser } from '@app/Common/types/ISocketWithUser';
 
 @Injectable()
 export class WsAuthGuard implements CanActivate {
@@ -17,7 +17,7 @@ export class WsAuthGuard implements CanActivate {
   ) {}
 
   public async canActivate(context: ExecutionContext): Promise<boolean> {
-    const client = context.switchToWs().getClient<Socket>();
+    const client = context.switchToWs().getClient<ISocketWithUser>();
 
     const authHeader = client.handshake.headers.authorization;
 
@@ -37,6 +37,8 @@ export class WsAuthGuard implements CanActivate {
     if (!authorizedUser) {
       throw unAuthError;
     }
+
+    client.user = authorizedUser;
 
     return true;
   }
