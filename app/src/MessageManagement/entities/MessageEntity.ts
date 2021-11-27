@@ -2,7 +2,13 @@
 eslint
 import/no-cycle: off,
 */
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 import { ParticipantEntity } from '@app/RoomManagement/entities/ParticipantEntity';
 import { MessageRelation } from '@app/MessageManagement/enums/MessageRelation';
@@ -11,6 +17,9 @@ import { MessageRelation } from '@app/MessageManagement/enums/MessageRelation';
 export class MessageEntity {
   @PrimaryGeneratedColumn('uuid')
   public id!: string;
+
+  @CreateDateColumn({ type: 'timestamptz' })
+  public date!: Date;
 
   @Column({ nullable: false })
   public value!: string;
